@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Will Suan, applied mathematics, scientific computing, computational neuroscience</title>
+  <meta name="description" content="Personal research site of Will Suan. Graduating mathematics student at UT Austin, incoming M.S. in Scientific Computing at NYU Courant. Looking for scoped unpaid research contributions in computational neuroscience." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:ital,wght@1,300;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============== NAV ============== -->
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Will Suan, home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <circle cx="6" cy="12" r="2" fill="currentColor"/>
+            <circle cx="18" cy="6" r="2" fill="currentColor"/>
+            <circle cx="18" cy="18" r="2" fill="currentColor"/>
+            <path d="M6 12 L18 6 M6 12 L18 18 M18 6 L18 18" stroke="currentColor" stroke-width="1" fill="none" opacity=".55"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span>Will Suan</span>
+          <span class="brand-sub">w.suan</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#research">Research</a>
+        <a href="#contribute">Contribute</a>
+        <a href="#background">Background</a>
+        <a href="#wedge">Project</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-meta" aria-hidden="true">
+        <span class="dot"></span>
+        <span class="nav-status">available, Summer 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============== HERO ============== -->
+    <section id="top" class="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+      <!-- corner registers -->
+      <div class="hero-grid" aria-hidden="true">
+        <span class="reg tl">+</span><span class="reg tr">+</span>
+        <span class="reg bl">+</span><span class="reg br">+</span>
+      </div>
+
+      <div class="hero-meta hero-meta-tl" aria-hidden="true">
+        <div class="kv"><span>fig.01</span><span>population dynamics, low-d projection</span></div>
+        <div class="kv"><span>n_units</span><span id="hud-n">256</span></div>
+        <div class="kv"><span>frame</span><span id="hud-f">000000</span></div>
+      </div>
+      <div class="hero-meta hero-meta-tr" aria-hidden="true">
+        <div class="kv right"><span>state</span><span class="ok">stable</span></div>
+        <div class="kv right"><span>τ</span><span id="hud-tau">0.018 s</span></div>
+        <div class="kv right"><span>z(t)</span><span>ℝ³ → ℝ²</span></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="tick"></span>
+          <span>Applied mathematics &nbsp;·&nbsp; Scientific computing &nbsp;·&nbsp; Computational neuroscience</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line">Will Suan</span>
+        </h1>
+
+        <p class="hero-lede">
+          I am a graduating mathematics student at UT Austin and an incoming M.S.
+          student in Scientific Computing at NYU Courant, preparing for PhD work
+          in computational neuroscience.
+        </p>
+
+        <p class="hero-ask">
+          I am looking for a scoped unpaid research project or volunteer
+          RA-style contribution before starting NYU, especially in neural data
+          analysis, latent dynamics, representation geometry, statistical
+          modeling, simulation, or scalable computational methods.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contact">
+            <span>Contact</span>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </a>
+          <a class="btn" href="#research"><span>Research interests</span></a>
+          <a class="btn btn-ghost" href="https://github.com/willsuan" target="_blank" rel="noopener"><span>GitHub</span></a>
+        </div>
+      </div>
+
+      <!-- raster strip -->
+      <div class="raster" aria-hidden="true">
+        <canvas id="raster-canvas"></canvas>
+        <div class="raster-label"><span>spike raster · 32 units · 1.2 s window</span></div>
+      </div>
+    </section>
+
+    <!-- ============== RESEARCH DIRECTION ============== -->
+    <section id="research" class="block">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 01 / research direction</div>
+        <h2 class="block-title">Where I want to do work.</h2>
+        <p class="block-lede">
+          I am drawn to questions about how structure in neural population
+          activity supports computation. The list below is an honest map of
+          what I read, think about, and want to contribute to.
+        </p>
+      </div>
+
+      <div class="orbit" aria-label="Research interests">
+        <svg class="orbit-svg" viewBox="-260 -180 520 360" aria-hidden="true">
+          <defs>
+            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(120,180,255,.18)"/>
+              <stop offset="100%" stop-color="rgba(120,180,255,0)"/>
+            </radialGradient>
+          </defs>
+          <circle cx="0" cy="0" r="170" fill="none" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 4"/>
+          <circle cx="0" cy="0" r="110" fill="none" stroke="rgba(255,255,255,.05)" stroke-dasharray="2 4"/>
+          <circle cx="0" cy="0" r="60" fill="none" stroke="rgba(255,255,255,.045)" stroke-dasharray="2 4"/>
+          <circle cx="0" cy="0" r="200" fill="url(#orbGlow)"/>
+          <circle cx="0" cy="0" r="3" fill="var(--accent-cyan)"/>
+        </svg>
+
+        <ul class="orbit-tags">
+          <li class="otag" data-r="170" data-a="-30" data-tone="cyan">
+            <span class="otag-no">i01</span>
+            <span class="otag-label">neural population structure</span>
+          </li>
+          <li class="otag" data-r="170" data-a="40" data-tone="violet">
+            <span class="otag-no">i02</span>
+            <span class="otag-label">latent dynamics</span>
+          </li>
+          <li class="otag" data-r="170" data-a="125" data-tone="green">
+            <span class="otag-no">i03</span>
+            <span class="otag-label">representation geometry</span>
+          </li>
+          <li class="otag" data-r="170" data-a="200" data-tone="cyan">
+            <span class="otag-no">i04</span>
+            <span class="otag-label">statistical models for neural data</span>
+          </li>
+          <li class="otag" data-r="170" data-a="260" data-tone="violet">
+            <span class="otag-no">i05</span>
+            <span class="otag-label">biological &amp; artificial representations</span>
+          </li>
+          <li class="otag" data-r="170" data-a="320" data-tone="green">
+            <span class="otag-no">i06</span>
+            <span class="otag-label">scalable methods for high-d data</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============== CONTRIBUTE ============== -->
+    <section id="contribute" class="block block-dim">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 02 / what I can contribute</div>
+        <h2 class="block-title">
+          Computational work attached to a real research question.
+        </h2>
+        <p class="block-lede">
+          I am not mainly looking to build software for its own sake. I want to
+          contribute computational work that helps answer a real research
+          question, including implementations, validations, and analyses someone in a
+          lab would otherwise have to find time for.
+        </p>
+      </div>
+
+      <ol class="contrib">
+        <li>
+          <span class="contrib-no">c.01</span>
+          <h3>Numerical implementation of models</h3>
+          <p>Translating a paper or sketch into careful, tested code. Small models, clean code paths, tracked assumptions.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.02</span>
+          <h3>Model comparison and validation</h3>
+          <p>Side-by-side fits, identifiability checks, recovery on synthetic data, sensitivity to priors and hyperparameters.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.03</span>
+          <h3>Robustness, null models, cross-validation</h3>
+          <p>Permutation and shuffle controls, finite-sample baselines, repeated splits, the unglamorous part that keeps a result honest.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.04</span>
+          <h3>Scalable analysis pipelines</h3>
+          <p>Tooling that lets a single researcher push a method across many sessions or recordings without losing reproducibility.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.05</span>
+          <h3>Simulation &amp; computational experiments</h3>
+          <p>Generating ground-truth data, running parameter sweeps, designing tests that isolate one effect at a time.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.06</span>
+          <h3>ML training &amp; evaluation</h3>
+          <p>Training loops with attention to correctness and efficiency, careful evaluation, and experiments that say something specific.</p>
+        </li>
+        <li>
+          <span class="contrib-no">c.07</span>
+          <h3>Visualization of high-dimensional dynamics</h3>
+          <p>Trajectories, embeddings, manifold structure, geometry. Figures meant to support a claim, not decorate it.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============== BACKGROUND ============== -->
+    <section id="background" class="block">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 03 / technical background</div>
+        <h2 class="block-title">Background.</h2>
+      </div>
+
+      <div class="bg-grid">
+        <div class="bg-skills">
+          <h3 class="bg-sub">Toolkit</h3>
+          <ul class="skills">
+            <li>Advanced numerical methods</li>
+            <li>High-performance computing</li>
+            <li>Machine learning</li>
+            <li>Statistics</li>
+            <li>Tensor methods</li>
+            <li>Parallel computing</li>
+            <li>Scientific simulation</li>
+            <li>Signal processing &amp; high-d data analysis</li>
+          </ul>
+        </div>
+
+        <div class="bg-record">
+          <h3 class="bg-sub">Record</h3>
+          <dl class="kvlist">
+            <div>
+              <dt>Degree</dt>
+              <dd>B.S. Mathematics, UT Austin <span class="kvmute">(graduating)</span></dd>
+            </div>
+            <div>
+              <dt>Next</dt>
+              <dd>M.S. Scientific Computing, NYU Courant <span class="kvmute">(starting fall)</span></dd>
+            </div>
+            <div>
+              <dt>GPA</dt>
+              <dd>3.8</dd>
+            </div>
+            <div>
+              <dt>Graduate coursework</dt>
+              <dd>Numerical analysis, tensor methods</dd>
+            </div>
+            <div>
+              <dt>Experience</dt>
+              <dd class="exp-list">
+                <span>CTCN</span><span class="sep">/</span>
+                <span>CVC</span><span class="sep">/</span>
+                <span>Saronic</span><span class="sep">/</span>
+                <span>Lockheed Martin</span>
+              </dd>
+            </div>
+          </dl>
+          <p class="bg-note">
+            Specific role descriptions and project details on request. I would
+            rather discuss them in context than list talking points here.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== RESEARCH WEDGE ============== -->
+    <section id="wedge" class="block block-wedge">
+      <div class="block-head">
+        <div class="block-eyebrow">
+          <span>§ 04 / current project direction</span>
+          <span class="status status-progress">in progress</span>
+        </div>
+        <h2 class="block-title">
+          Latent-variable and representation-geometry benchmarks for public neural data.
+        </h2>
+        <p class="block-lede">
+          I am exploring a small reproducible benchmark for comparing
+          latent-variable methods and representation-geometry metrics on public
+          neural population datasets. The goal is to make it easier to test
+          methods under finite-sample noise, compare baselines, and produce
+          clear reproducible figures.
+        </p>
+      </div>
+
+      <div class="wedge-grid">
+        <div class="wedge-diagram" aria-hidden="true">
+          <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="wedgeLine" x1="0" x2="1">
+                <stop offset="0" stop-color="rgba(120,200,255,.15)"/>
+                <stop offset=".5" stop-color="rgba(170,140,255,.5)"/>
+                <stop offset="1" stop-color="rgba(120,255,180,.15)"/>
+              </linearGradient>
+            </defs>
+            <!-- column lanes -->
+            <g stroke="rgba(255,255,255,.06)" stroke-dasharray="1 4">
+              <line x1="120" x2="120" y1="20" y2="340"/>
+              <line x1="300" x2="300" y1="20" y2="340"/>
+              <line x1="480" x2="480" y1="20" y2="340"/>
+            </g>
+            <!-- input nodes -->
+            <g class="wd-node" transform="translate(120,80)">
+              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">spike trains</text>
+            </g>
+            <g class="wd-node" transform="translate(120,180)">
+              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">calcium ΔF/F</text>
+            </g>
+            <g class="wd-node" transform="translate(120,280)">
+              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">behavior</text>
+            </g>
+            <!-- model nodes -->
+            <g class="wd-node accent-cyan" transform="translate(300,60)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
+              <text y="4" text-anchor="middle" fill="#dde7f0" font-family="IBM Plex Mono" font-size="11">PCA / FA</text>
+            </g>
+            <g class="wd-node accent-cyan" transform="translate(300,120)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
+              <text y="4" text-anchor="middle" fill="#dde7f0" font-family="IBM Plex Mono" font-size="11">GPFA</text>
+            </g>
+            <g class="wd-node accent-violet" transform="translate(300,180)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
+              <text y="4" text-anchor="middle" fill="#e6dcf3" font-family="IBM Plex Mono" font-size="11">CEBRA-style</text>
+            </g>
+            <g class="wd-node accent-green" transform="translate(300,240)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
+              <text y="4" text-anchor="middle" fill="#dceee0" font-family="IBM Plex Mono" font-size="11">RSA / CKA</text>
+            </g>
+            <g class="wd-node accent-green" transform="translate(300,300)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
+              <text y="4" text-anchor="middle" fill="#dceee0" font-family="IBM Plex Mono" font-size="11">dim. metrics</text>
+            </g>
+            <!-- output nodes -->
+            <g class="wd-node" transform="translate(480,120)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">finite-sample</text>
+            </g>
+            <g class="wd-node" transform="translate(480,180)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">comparisons</text>
+            </g>
+            <g class="wd-node" transform="translate(480,240)">
+              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
+              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">repro figures</text>
+            </g>
+            <!-- connectors -->
+            <g fill="none" stroke="url(#wedgeLine)" stroke-width="1">
+              <path d="M178 80 C 230 80, 230 60, 234 60"/>
+              <path d="M178 80 C 230 80, 230 120, 234 120"/>
+              <path d="M178 80 C 230 80, 230 180, 234 180"/>
+              <path d="M178 180 C 230 180, 230 120, 234 120"/>
+              <path d="M178 180 C 230 180, 230 180, 234 180"/>
+              <path d="M178 180 C 230 180, 230 240, 234 240"/>
+              <path d="M178 280 C 230 280, 230 240, 234 240"/>
+              <path d="M178 280 C 230 280, 230 300, 234 300"/>
+              <path d="M366 60 C 410 60, 410 120, 414 120"/>
+              <path d="M366 120 C 410 120, 410 120, 414 120"/>
+              <path d="M366 180 C 410 180, 410 180, 414 180"/>
+              <path d="M366 240 C 410 240, 410 180, 414 180"/>
+              <path d="M366 240 C 410 240, 410 240, 414 240"/>
+              <path d="M366 300 C 410 300, 410 240, 414 240"/>
+            </g>
+          </svg>
+        </div>
+
+        <ul class="wedge-tags" aria-label="Components">
+          <li>PCA / FA / GPFA-style baselines</li>
+          <li>CEBRA or related embeddings</li>
+          <li>RSA · CKA · dimensionality metrics</li>
+          <li>finite-sample robustness</li>
+          <li>public neural datasets</li>
+          <li>reproducible figures</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============== SELECTED WORK ============== -->
+    <section id="work" class="block">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 05 / selected work</div>
+        <h2 class="block-title">Selected work.</h2>
+        <p class="block-lede">A small set of projects, deliberately
+          research-facing rather than product-shaped.</p>
+      </div>
+
+      <ul class="tiles">
+        <li class="tile">
+          <div class="tile-no">w.01</div>
+          <h3 class="tile-title">neural-field-gpu</h3>
+          <p class="tile-rel">A GPU implementation of neural field equations for studying spatial pattern formation in cortical models.</p>
+          <ul class="tile-tags">
+            <li>cuda</li><li>numerics</li><li>simulation</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/neural-field-gpu" target="_blank" rel="noopener" aria-label="Open neural-field-gpu">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.02</div>
+          <h3 class="tile-title">enso-attractor-recovery</h3>
+          <p class="tile-rel">Reconstructing low-dimensional dynamics from a noisy climate time series, a study in attractor recovery on real data.</p>
+          <ul class="tile-tags">
+            <li>delay embedding</li><li>dynamical systems</li><li>time series</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/enso-attractor-recovery" target="_blank" rel="noopener" aria-label="Open enso-attractor-recovery">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.03</div>
+          <h3 class="tile-title">HSI–MSI image fusion</h3>
+          <p class="tile-rel">Tensor-method approach to fusing hyperspectral and multispectral images for higher-resolution scientific imaging.</p>
+          <ul class="tile-tags">
+            <li>tensors</li><li>linear algebra</li><li>imaging</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/HSI-MSI-Image-Fusion" target="_blank" rel="noopener" aria-label="Open HSI MSI image fusion">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.04</div>
+          <h3 class="tile-title">high-d viz toolkit</h3>
+          <p class="tile-rel">Notebook-grade visualization of trajectories and embeddings in spaces that do not fit on a screen, with details available on request.</p>
+          <ul class="tile-tags">
+            <li>visualization</li><li>embeddings</li><li>geometry</li>
+          </ul>
+          <a class="tile-link" href="mailto:william.suan@gmail.com?subject=High-dimensional%20visualization%20work" aria-label="Ask about high-dimensional visualization work">
+            <span>details</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.05</div>
+          <h3 class="tile-title">ml-eval-efficiency</h3>
+          <p class="tile-rel">Notes and code on training-loop correctness and evaluation efficiency for small-to-mid scale models.</p>
+          <ul class="tile-tags">
+            <li>ml</li><li>evaluation</li><li>efficiency</li>
+          </ul>
+          <a class="tile-link" href="mailto:william.suan@gmail.com?subject=ML%20evaluation%20work" aria-label="Ask about ML evaluation work">
+            <span>details</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============== CONTACT ============== -->
+    <section id="contact" class="block block-contact">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 06 / contact</div>
+        <h2 class="block-title">If you know of a scoped unpaid project where a math and scientific-computing background could be useful, I would be grateful to talk.</h2>
+      </div>
+
+      <div class="contact-grid">
+        <ul class="contact-list">
+          <li>
+            <span class="ci">email</span>
+            <a href="mailto:william.suan@gmail.com">william.suan@gmail.com</a>
+          </li>
+          <li>
+            <span class="ci">github</span>
+            <a href="https://github.com/willsuan" target="_blank" rel="noopener">github.com/willsuan</a>
+          </li>
+          <li>
+            <span class="ci">linkedin</span>
+            <a href="https://www.linkedin.com/in/william-suan/" target="_blank" rel="noopener">linkedin.com/in/william-suan</a>
+          </li>
+          <li>
+            <span class="ci">cv</span>
+            <a href="mailto:william.suan@gmail.com?subject=CV%20request">available on request</a>
+          </li>
+        </ul>
+
+        <p class="contact-tag">
+          <span class="mono">w.suan@</span> <span>open to a 5–15 hour weekly contribution between now and August.</span>
+        </p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-inner">
+        <span class="mono">© 2026 · will suan</span>
+        <span class="mono">austin to new york</span>
+        <span class="mono">last build · <span id="build-stamp">pending</span></span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- command palette (cmd/ctrl + k) -->
+  <div id="palette" class="palette" aria-hidden="true" role="dialog" aria-label="Quick navigation">
+    <div class="palette-card">
+      <div class="palette-bar">
+        <span class="mono">›</span>
+        <input id="palette-input" type="text" placeholder="jump to section…" autocomplete="off" spellcheck="false" />
+        <span class="mono palette-hint">esc</span>
+      </div>
+      <ul id="palette-list" class="palette-list"></ul>
+    </div>
+  </div>
+
+  <button id="palette-toggle" class="palette-toggle" aria-label="Open quick nav">
+    <span class="mono">⌘ K</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
