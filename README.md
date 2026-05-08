@@ -23,7 +23,7 @@ Single-page static site, GitHub Pages-ready.
 
 ## Current links
 
-- Email: `william.suan@gmail.com`
+- Email: `suan@utexas.edu`
 - GitHub: `https://github.com/willsuan`
 - LinkedIn: `https://www.linkedin.com/in/william-suan/`
 - Public project repos are linked where available. Non-public project details route to email.
