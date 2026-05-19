@@ -388,7 +388,7 @@ a.placeholder { text-decoration: underline dashed rgba(255,255,255,.25); text-un
   overflow: hidden;
   border-radius: 2px;
 }
-.headshot-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.headshot-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
 .headshot-placeholder {
   position: absolute; inset: 0;
   display: none;
