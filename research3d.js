@@ -102,16 +102,16 @@ function initResearch3D(canvas) {
   // Light grey body with a dark wireframe — wireframe carries the gyri /
   // sulci read, body gives it weight.
   const baseMatTemplate = new THREE.MeshBasicMaterial({
-    color: 0xd0d6df,
+    color: 0xd6dce5,
     transparent: true,
-    opacity: 0.55,
+    opacity: 0.75,
     side: THREE.DoubleSide,
     depthWrite: false,
   });
   const wireMatTemplate = new THREE.LineBasicMaterial({
-    color: 0x2a3140,
+    color: 0x1a2030,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.7,
     depthWrite: false,
   });
 
@@ -130,7 +130,7 @@ function initResearch3D(canvas) {
   // ---- Load the GLB ------------------------------------------------------
   const loader = new GLTFLoader();
   loader.load(
-    'assets/connectome.glb?v=2',
+    'assets/connectome.glb?v=3',
     (gltf) => {
       const root = gltf.scene;
       const wireGroup = new THREE.Group();
@@ -161,7 +161,7 @@ function initResearch3D(canvas) {
               materials: [],
               wireMats: [],
               toneColor: new THREE.Color(TONE_HEX[REGION_TONE[region]]),
-              baseColor: new THREE.Color(0xd0d6df),
+              baseColor: new THREE.Color(0xd6dce5),
               hoverAmount: 0,
               centroid: null,
               label: document.querySelector(`.brain-anchor[data-anchor="${region}"]`),
@@ -392,8 +392,8 @@ function initResearch3D(canvas) {
       r.hoverAmount += (targetAmt - r.hoverAmount) * 0.12;
       tmpColor.copy(r.baseColor).lerp(r.toneColor, r.hoverAmount);
       // Hover bumps opacity slightly and saturates the tone.
-      const opacity     = 0.60 + 0.20 * r.hoverAmount;
-      const wireOpacity = 0.55 + 0.30 * r.hoverAmount;
+      const opacity     = 0.75 + 0.15 * r.hoverAmount;
+      const wireOpacity = 0.70 + 0.20 * r.hoverAmount;
       for (const m of r.materials) {
         m.color.copy(tmpColor);
         m.opacity = opacity;
