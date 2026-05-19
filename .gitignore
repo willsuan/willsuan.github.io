@@ -1,0 +1,14 @@
+# Local agent / editor settings
+.claude/
+.vscode/
+
+# Local uploads (screenshots, scratch files)
+uploads/
+
+# Python venv used by tools/build-*.py
+tools/.venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

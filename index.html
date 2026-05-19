@@ -3,15 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Will Suan, applied mathematics, scientific computing, computational neuroscience</title>
-  <meta name="description" content="Personal research site of Will Suan. Graduating mathematics student at UT Austin, incoming M.S. in Scientific Computing at NYU Courant. Looking for scoped unpaid research contributions in computational neuroscience." />
+  <title>Will Suan — applied mathematics, scientific computing, computational neuroscience</title>
+  <meta name="description" content="Personal research site of Will Suan. Graduating mathematics student at UT Austin, incoming M.S. in Scientific Computing at NYU Courant. Looking for a full-time research contribution in computational neuroscience before NYU." />
+  <meta name="author" content="Will Suan" />
+  <meta name="theme-color" content="#1a3aa3" />
+  <link rel="canonical" href="https://willsuan.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Will Suan — applied math · scientific computing · computational neuroscience" />
+  <meta property="og:description" content="Personal research site of Will Suan. UT Austin → NYU Courant. Looking for a full-time research contribution before NYU." />
+  <meta property="og:url" content="https://willsuan.github.io/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Will Suan — research site" />
+  <meta name="twitter:description" content="Applied math / scientific computing / computational neuroscience." />
+
+  <!-- Favicon (inline SVG so the page is fully self-contained) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%231a3aa3'/><circle cx='6' cy='12' r='2' fill='%23ffd23f'/><circle cx='18' cy='6' r='2' fill='%23ffd23f'/><circle cx='18' cy='18' r='2' fill='%23ffd23f'/></svg>" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:ital,wght@1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -30,20 +47,21 @@
         </span>
         <span class="brand-text">
           <span>Will Suan</span>
-          <span class="brand-sub">suan@utexas.edu</span>
+          <span class="brand-sub">w.suan</span>
         </span>
       </a>
       <nav class="nav-links" aria-label="Primary">
+        <a href="#news">News</a>
         <a href="#research">Research</a>
-        <a href="#contribute">Contribution</a>
-        <a href="#background">Background</a>
-        <a href="#wedge">Project</a>
+        <a href="#statement">Statement</a>
+        <a href="#projects">Projects</a>
         <a href="#work">Work</a>
+        <a href="#background">Background</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav-meta" aria-hidden="true">
         <span class="dot"></span>
-        <span class="nav-status">available, Summer 2026</span>
+        <span class="nav-status">available — Summer 2026</span>
       </div>
     </div>
   </header>
@@ -52,194 +70,700 @@
 
     <!-- ============== HERO ============== -->
     <section id="top" class="hero">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-
-      <!-- corner registers -->
       <div class="hero-grid" aria-hidden="true">
         <span class="reg tl">+</span><span class="reg tr">+</span>
         <span class="reg bl">+</span><span class="reg br">+</span>
       </div>
 
-      <div class="hero-meta hero-meta-tl" aria-hidden="true">
-        <div class="kv"><span>fig.01</span><span>population dynamics, low-d projection</span></div>
-        <div class="kv"><span>n_units</span><span id="hud-n">256</span></div>
-        <div class="kv"><span>frame</span><span id="hud-f">000000</span></div>
-      </div>
-      <div class="hero-meta hero-meta-tr" aria-hidden="true">
-        <div class="kv right"><span>state</span><span class="ok">stable</span></div>
-        <div class="kv right"><span>τ</span><span id="hud-tau">0.018 s</span></div>
-        <div class="kv right"><span>z(t)</span><span>ℝ³ → ℝ²</span></div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-meta hero-meta-tr">
+        <div class="attractor-trigger">
+          <button class="kv right attractor-toggle" id="attractor-toggle" aria-expanded="false" aria-haspopup="listbox">
+            <span>attractor</span>
+            <span class="on" id="hud-attractor">—</span>
+            <svg class="chev" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </button>
+          <ul class="attractor-menu" id="attractor-menu" role="listbox" aria-label="Choose attractor" hidden></ul>
+        </div>
+        <div class="attractor-brief" id="attractor-brief" hidden>
+          <div class="brief-title mono" id="brief-title">—</div>
+          <p class="brief-body" id="brief-body">—</p>
+        </div>
       </div>
 
       <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="tick"></span>
-          <span>Applied mathematics &nbsp;·&nbsp; Scientific computing &nbsp;·&nbsp; Computational neuroscience</span>
+        <div class="hero-text">
+          <div class="hero-eyebrow">
+            <span class="tick"></span>
+            <span>applied math · scientific computing · machine learning · comp. neuro</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="line">Will Suan</span>
+          </h1>
+
+          <p class="hero-lede">
+            I am a graduating mathematics student at UT Austin and an incoming M.S.
+            student in Scientific Computing at NYU Courant, preparing for PhD work
+            in computational neuroscience.
+          </p>
+
+          <p class="hero-ask">
+            I am looking for a full-time research contribution before starting
+            NYU, especially in neural data analysis, latent dynamics,
+            representation geometry, statistical modeling, simulation, or
+            scalable computational methods.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="assets/Will_Suan_Resume.pdf" target="_blank" rel="noopener">
+              <span>View résumé</span>
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+            </a>
+            <a class="btn" href="#research"><span>Research interests</span></a>
+            <a class="btn btn-ghost" href="#contact"><span>Contact</span></a>
+          </div>
         </div>
-
-        <h1 class="hero-title">
-          <span class="line">Will Suan</span>
-        </h1>
-
-        <p class="hero-lede">
-          I am a graduating mathematics student at UT Austin and an incoming M.S.
-          student in Scientific Computing at NYU Courant, preparing for PhD work
-          in computational neuroscience.
-        </p>
-
-        <p class="hero-ask">
-          I am looking for a scoped unpaid research project or volunteer
-          RA-style contribution before starting NYU, especially in neural data
-          analysis, latent dynamics, representation geometry, statistical
-          modeling, simulation, or scalable computational methods.
-        </p>
-
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#contact">
-            <span>Contact</span>
-            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
-          </a>
-          <a class="btn" href="#research"><span>Research interests</span></a>
-          <a class="btn btn-ghost" href="https://github.com/willsuan" target="_blank" rel="noopener"><span>GitHub</span></a>
-        </div>
-      </div>
-
-      <!-- raster strip -->
-      <div class="raster" aria-hidden="true">
-        <canvas id="raster-canvas"></canvas>
-        <div class="raster-label"><span>spike raster · 32 units · 1.2 s window</span></div>
       </div>
     </section>
 
-    <!-- ============== RESEARCH DIRECTION ============== -->
-    <section id="research" class="block">
+    <!-- ============== NEWS ============== -->
+    <section id="news" class="block block-dim block-news">
       <div class="block-head">
-        <div class="block-eyebrow">§ 01 / research direction</div>
-        <h2 class="block-title">Where I want to do work.</h2>
+        <div class="block-eyebrow">§ 01 / news</div>
+        <h2 class="block-title">News.</h2>
         <p class="block-lede">
-          I am drawn to questions about how structure in neural population
-          activity supports computation. The list below is an honest map of
-          what I read, think about, and want to contribute to.
+          Short, dated updates on anything I would want a collaborator to know.
         </p>
       </div>
 
-      <div class="orbit" aria-label="Research interests">
-        <svg class="orbit-svg" viewBox="-260 -180 520 360" aria-hidden="true">
-          <defs>
-            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="rgba(120,180,255,.18)"/>
-              <stop offset="100%" stop-color="rgba(120,180,255,0)"/>
-            </radialGradient>
-          </defs>
-          <circle cx="0" cy="0" r="170" fill="none" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 4"/>
-          <circle cx="0" cy="0" r="110" fill="none" stroke="rgba(255,255,255,.05)" stroke-dasharray="2 4"/>
-          <circle cx="0" cy="0" r="60" fill="none" stroke="rgba(255,255,255,.045)" stroke-dasharray="2 4"/>
-          <circle cx="0" cy="0" r="200" fill="url(#orbGlow)"/>
-          <circle cx="0" cy="0" r="3" fill="var(--accent-cyan)"/>
-        </svg>
-
-        <ul class="orbit-tags">
-          <li class="otag" data-r="170" data-a="-30" data-tone="cyan">
-            <span class="otag-no">i01</span>
-            <span class="otag-label">neural population structure</span>
-          </li>
-          <li class="otag" data-r="170" data-a="40" data-tone="violet">
-            <span class="otag-no">i02</span>
-            <span class="otag-label">latent dynamics</span>
-          </li>
-          <li class="otag" data-r="170" data-a="125" data-tone="green">
-            <span class="otag-no">i03</span>
-            <span class="otag-label">representation geometry</span>
-          </li>
-          <li class="otag" data-r="170" data-a="200" data-tone="cyan">
-            <span class="otag-no">i04</span>
-            <span class="otag-label">statistical models for neural data</span>
-          </li>
-          <li class="otag" data-r="170" data-a="260" data-tone="violet">
-            <span class="otag-no">i05</span>
-            <span class="otag-label">biological &amp; artificial representations</span>
-          </li>
-          <li class="otag" data-r="170" data-a="320" data-tone="green">
-            <span class="otag-no">i06</span>
-            <span class="otag-label">scalable methods for high-d data</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============== CONTRIBUTE ============== -->
-    <section id="contribute" class="block block-dim">
-      <div class="block-head">
-        <div class="block-eyebrow">§ 02 / what I can contribute</div>
-        <h2 class="block-title">
-          Computational work attached to a real research question.
-        </h2>
-        <p class="block-lede">
-          I am not mainly looking to build software for its own sake. I want to
-          contribute computational work that helps answer a real research
-          question, including implementations, validations, and analyses someone in a
-          lab would otherwise have to find time for.
-        </p>
-      </div>
-
-      <ol class="contrib">
-        <li>
-          <span class="contrib-no">c.01</span>
-          <h3>Numerical implementation of models</h3>
-          <p>Translating a paper or sketch into careful, tested code. Small models, clean code paths, tracked assumptions.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.02</span>
-          <h3>Model comparison and validation</h3>
-          <p>Side-by-side fits, identifiability checks, recovery on synthetic data, sensitivity to priors and hyperparameters.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.03</span>
-          <h3>Robustness, null models, cross-validation</h3>
-          <p>Permutation and shuffle controls, finite-sample baselines, repeated splits, the unglamorous part that keeps a result honest.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.04</span>
-          <h3>Scalable analysis pipelines</h3>
-          <p>Tooling that lets a single researcher push a method across many sessions or recordings without losing reproducibility.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.05</span>
-          <h3>Simulation &amp; computational experiments</h3>
-          <p>Generating ground-truth data, running parameter sweeps, designing tests that isolate one effect at a time.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.06</span>
-          <h3>ML training &amp; evaluation</h3>
-          <p>Training loops with attention to correctness and efficiency, careful evaluation, and experiments that say something specific.</p>
-        </li>
-        <li>
-          <span class="contrib-no">c.07</span>
-          <h3>Visualization of high-dimensional dynamics</h3>
-          <p>Trajectories, embeddings, manifold structure, geometry. Figures meant to support a claim, not decorate it.</p>
+      <ol class="news-list">
+        <li class="news-item">
+          <div class="news-date mono">2026.05.09</div>
+          <div class="news-body">Graduating from UT Austin with a B.S. in Mathematics and a Certificate in Scientific Computation and Data Sciences.</div>
         </li>
       </ol>
     </section>
 
-    <!-- ============== BACKGROUND ============== -->
+    <!-- ============== § 01 / RESEARCH DIRECTION ============== -->
+    <section id="research" class="block">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 02 / research direction</div>
+        <h2 class="block-title">Where I want to do work.</h2>
+        <p class="block-lede">
+          I am drawn to questions about how structure in neural population
+          activity supports computation. Each interest below opens a short note
+          on what specifically pulls me toward it.
+        </p>
+      </div>
+
+      <div class="brain-wrap" aria-label="Research interests">
+        <canvas id="brain-canvas" class="brain-media" aria-hidden="true"></canvas>
+        <div class="brain-hint mono">human cortex · fsaverage pial · drag to rotate · click a region</div>
+
+        <div class="brain-anchor" data-anchor="frontal" data-tone="red">
+          <span class="ba-no">i01</span>
+          <span class="ba-label">neural population structure</span>
+        </div>
+        <div class="brain-anchor" data-anchor="parietal" data-tone="orange">
+          <span class="ba-no">i02</span>
+          <span class="ba-label">latent dynamics</span>
+        </div>
+        <div class="brain-anchor" data-anchor="occipital" data-tone="yellow">
+          <span class="ba-no">i03</span>
+          <span class="ba-label">representation geometry</span>
+        </div>
+        <div class="brain-anchor" data-anchor="temporal" data-tone="green">
+          <span class="ba-no">i04</span>
+          <span class="ba-label">statistical models for neural data</span>
+        </div>
+        <div class="brain-anchor" data-anchor="cerebellum" data-tone="blue">
+          <span class="ba-no">i05</span>
+          <span class="ba-label">biological &amp; artificial representations</span>
+        </div>
+        <div class="brain-anchor" data-anchor="brainstem" data-tone="magenta">
+          <span class="ba-no">i06</span>
+          <span class="ba-label">scalable methods for high-d data</span>
+        </div>
+      </div>
+
+      <div class="interests">
+        <details class="interest" data-tone="red">
+          <summary>
+            <span class="i-no">i01</span>
+            <span class="i-label">neural population structure</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              How do the joint firing patterns of many neurons carry computation?
+              I am interested in how covariance structure, low-dimensional shared
+              variability, and population geometry constrain what a circuit can
+              represent and how flexibly it can recombine those representations.
+            </p>
+          </div>
+        </details>
+
+        <details class="interest" data-tone="orange">
+          <summary>
+            <span class="i-no">i02</span>
+            <span class="i-label">latent dynamics</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              The view that neural activity traces low-dimensional trajectories
+              in state space — and that those trajectories implement the
+              computation — is the framing I find most generative. I want to
+              get more careful at fitting, validating, and interpreting latent
+              dynamical models on real recordings.
+            </p>
+          </div>
+        </details>
+
+        <details class="interest" data-tone="yellow">
+          <summary>
+            <span class="i-no">i03</span>
+            <span class="i-label">representation geometry</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              Geometry as a vocabulary for what a representation does: which
+              distinctions are separable, which are tangled, how curvature and
+              dimensionality track task structure. I am drawn to the parts of
+              this work that connect cleanly to differential geometry and to
+              concrete measurements you can make on data.
+            </p>
+          </div>
+        </details>
+
+        <details class="interest" data-tone="green">
+          <summary>
+            <span class="i-no">i04</span>
+            <span class="i-label">statistical models for neural data</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              Point-process models, state-space models, hierarchical and
+              generative latent-variable models — the toolkit that lets us
+              actually say something about noisy, partially observed neural
+              recordings. I care about identifiability, finite-sample behaviour,
+              and what a fit really tells you.
+            </p>
+          </div>
+        </details>
+
+        <details class="interest" data-tone="blue">
+          <summary>
+            <span class="i-no">i05</span>
+            <span class="i-label">biological &amp; artificial representations</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              Comparing what brains and trained networks encode — not as a
+              metaphor, but as a measurement problem. RSA, CKA, alignment, and
+              the careful follow-ups that distinguish a real structural match
+              from a coincidence of the metric.
+            </p>
+          </div>
+        </details>
+
+        <details class="interest" data-tone="magenta">
+          <summary>
+            <span class="i-no">i06</span>
+            <span class="i-label">scalable methods for high-d data</span>
+            <svg class="i-chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 5l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"/></svg>
+          </summary>
+          <div class="interest-body">
+            <p>
+              The computational side: numerical linear algebra, tensor methods,
+              GPU-accelerated fits, careful evaluation pipelines. The kind of
+              work that decides whether a method actually runs on a real
+              dataset or stays a toy demo.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============== § 02 / RESEARCH STATEMENT ============== -->
+    <section id="statement" class="block block-dim block-statement">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 03 / research statement</div>
+        <h2 class="block-title statement-title">When an idea takes shape in the brain, what shape does it take?</h2>
+      </div>
+
+      <div class="statement-body">
+        <p>
+          <em>Shape</em> is meant literally. The joint activity of a neural
+          population traces something with geometry, including distances
+          between states, curvature of trajectories, and the dimensionality a
+          circuit is willing to use, and that geometry seems to carry the work
+          of representation. The question I keep coming back to is whether
+          distances on a population manifold correspond to discriminability
+          between stimuli, and what that would say about how the brain encodes
+          them.
+        </p>
+        <p>
+          What carries weight in this area is rarely the headline method. A
+          latent-variable fit or an alignment metric is only as trustworthy as
+          the parameter sweeps, finite-sample checks, and figures around it.
+          Working on structure-preserving networks taught me a version of the
+          same lesson, that the geometry you bake into a model is not the
+          geometry it ends up using, because training deforms it and the model
+          finds another way. The same caution belongs in neuroscience.
+        </p>
+        <p>
+          I'm comfortable across the stack this work needs. I've built
+          controlled Hamiltonian optimization modules and port-Hamiltonian
+          forecasting architectures in PyTorch, fit point-process and
+          state-space models to spiking data with MCMC, run MPI-parallelized
+          FDTD sweeps in C++, and shipped detection and tracking pipelines
+          with the evaluation work to back them up. I can take a question end
+          to end, from numerical methods and model fitting through statistical
+          evaluation, ablations, and the kind of careful figures that turn a
+          demonstration into evidence.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== § 03 / PROJECTS (paginated) ============== -->
+    <section id="projects" class="block">
+      <div class="block-head proj-head">
+        <div class="block-eyebrow proj-eyebrow">
+          <span>§ 04 / projects</span>
+          <span class="status status-progress">in progress</span>
+          <div class="proj-nav" role="group" aria-label="Project pagination">
+            <span class="proj-counter mono" id="proj-counter">01 / 03</span>
+            <button class="proj-arrow" id="proj-prev" aria-label="Previous project">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square"/></svg>
+            </button>
+            <button class="proj-arrow" id="proj-next" aria-label="Next project">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-stage" aria-live="polite">
+        <button class="proj-arrow proj-arrow-edge proj-arrow-prev" id="proj-prev-edge" aria-label="Previous project">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square"/></svg>
+        </button>
+        <button class="proj-arrow proj-arrow-edge proj-arrow-next" id="proj-next-edge" aria-label="Next project">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="square"/></svg>
+        </button>
+        <div class="proj-track" id="proj-track" data-idx="0">
+
+          <article class="proj-slide" data-slide="0" aria-label="Project 1 of 3">
+            <header class="proj-slide-head">
+              <h2 class="block-title">
+                Latent-variable and representation-geometry benchmarks for public neural data.
+              </h2>
+              <p class="block-lede">
+                I am exploring a small reproducible benchmark for comparing
+                latent-variable methods and representation-geometry metrics on public
+                neural population datasets. The goal is to make it easier to test
+                methods under finite-sample noise, compare baselines, and produce
+                clear reproducible figures.
+              </p>
+            </header>
+
+            <div class="wedge-grid">
+              <div class="wedge-diagram" aria-hidden="true">
+                <svg viewBox="0 0 1240 720" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <path d="M40 0 L0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    </pattern>
+                    <marker id="arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                      <path d="M0 0 L10 5 L0 10 z" fill="rgba(255,255,255,0.65)"/>
+                    </marker>
+                    <marker id="arr-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                      <path d="M0 0 L10 5 L0 10 z" fill="rgba(255,210,63,0.85)"/>
+                    </marker>
+                  </defs>
+
+                  <rect width="1240" height="720" fill="url(#grid)"/>
+
+                  <!-- Column headers -->
+                  <g font-family="ui-monospace,monospace" font-size="13" letter-spacing="0.18em" fill="rgba(255,210,63,0.85)">
+                    <text x="180"  y="44" text-anchor="middle">DATA</text>
+                    <text x="620"  y="44" text-anchor="middle">PIPELINE</text>
+                    <text x="1060" y="44" text-anchor="middle">ARTIFACTS</text>
+                  </g>
+                  <g stroke="rgba(255,210,63,0.22)" stroke-dasharray="3 5">
+                    <line x1="60"  y1="58" x2="300"  y2="58"/>
+                    <line x1="400" y1="58" x2="840"  y2="58"/>
+                    <line x1="940" y1="58" x2="1180" y2="58"/>
+                  </g>
+
+                  <!-- ====== Column 1: DATA ====== -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <g>
+                      <rect x="60"  y="110" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="180" y="142" text-anchor="middle" font-size="19" fill="rgba(240,244,255,0.95)">spike trains</text>
+                      <text x="180" y="168" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">Neuropixels · M1 · motor</text>
+                    </g>
+                    <g>
+                      <rect x="60"  y="310" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="180" y="342" text-anchor="middle" font-size="19" fill="rgba(240,244,255,0.95)">calcium ΔF/F</text>
+                      <text x="180" y="368" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">2-photon · cortex · sensory</text>
+                    </g>
+                    <g>
+                      <rect x="60"  y="510" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="180" y="542" text-anchor="middle" font-size="19" fill="rgba(240,244,255,0.95)">task labels</text>
+                      <text x="180" y="568" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">stimulus · reach · choice</text>
+                    </g>
+                  </g>
+
+                  <!-- Data → Pipeline arrows -->
+                  <g fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4">
+                    <path d="M300 149 C 350 149, 360 130, 400 130" marker-end="url(#arr-w)"/>
+                    <path d="M300 349 C 350 349, 360 130, 400 130" marker-end="url(#arr-w)"/>
+                    <path d="M300 549 C 350 549, 360 130, 400 130" marker-end="url(#arr-w)"/>
+                  </g>
+
+                  <!-- ====== Column 2: PIPELINE (4 stacked steps) ====== -->
+                  <!-- Step 1: SPLIT -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <rect x="400" y="90" width="440" height="82" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                    <text x="620" y="120" text-anchor="middle" font-size="11" letter-spacing="0.18em" fill="rgba(255,210,63,0.8)">01 · SPLIT</text>
+                    <text x="620" y="146" text-anchor="middle" font-size="17" fill="rgba(240,244,255,0.95)">k-fold + n-trial subsamples</text>
+                    <text x="620" y="164" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">paired draws shared across methods</text>
+                  </g>
+
+                  <path d="M620 172 L620 208" stroke="rgba(255,210,63,0.85)" stroke-width="1.6" marker-end="url(#arr-y)" fill="none"/>
+
+                  <!-- Step 2: FIT (with method chips inside) -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <rect x="400" y="212" width="440" height="186" rx="8" fill="rgba(255,210,63,0.04)" stroke="rgba(255,210,63,0.8)" stroke-width="1.6"/>
+                    <text x="620" y="240" text-anchor="middle" font-size="11" letter-spacing="0.18em" fill="rgba(255,210,63,0.85)">02 · FIT  (the swappable piece)</text>
+                    <text x="620" y="264" text-anchor="middle" font-size="17" fill="rgba(240,244,255,0.95)">one method per run, matched budget</text>
+
+                    <!-- Method chips: 6 colored pills inside the FIT box -->
+                    <g font-size="13">
+                      <g><rect x="420" y="284" width="115" height="32" rx="16" fill="rgba(255,59,48,0.10)"  stroke="#ff3b30" stroke-width="1.2"/><text x="478" y="305" text-anchor="middle" fill="#ffd1cd">PCA · FA</text></g>
+                      <g><rect x="547" y="284" width="115" height="32" rx="16" fill="rgba(255,138,31,0.10)" stroke="#ff8a1f" stroke-width="1.2"/><text x="605" y="305" text-anchor="middle" fill="#ffe1c4">GPFA</text></g>
+                      <g><rect x="674" y="284" width="146" height="32" rx="16" fill="rgba(255,210,63,0.10)" stroke="#ffd23f" stroke-width="1.2"/><text x="747" y="305" text-anchor="middle" fill="#fff2b8">CEBRA-style</text></g>
+                      <g><rect x="420" y="326" width="115" height="32" rx="16" fill="rgba(47,208,107,0.10)" stroke="#2fd06b" stroke-width="1.2"/><text x="478" y="347" text-anchor="middle" fill="#bfeccf">RSA · CKA</text></g>
+                      <g><rect x="547" y="326" width="146" height="32" rx="16" fill="rgba(111,181,255,0.10)" stroke="#6fb5ff" stroke-width="1.2"/><text x="620" y="347" text-anchor="middle" fill="#cfe3ff">participation ratio</text></g>
+                      <g><rect x="705" y="326" width="115" height="32" rx="16" fill="rgba(255,61,151,0.10)" stroke="#ff3d97" stroke-width="1.2"/><text x="763" y="347" text-anchor="middle" fill="#ffc8e1">intrinsic-D</text></g>
+                    </g>
+
+                    <text x="620" y="384" text-anchor="middle" font-size="11" letter-spacing="0.08em" fill="rgba(255,255,255,0.55)">matched hyperparameter search · same wall-clock per method</text>
+                  </g>
+
+                  <path d="M620 398 L620 434" stroke="rgba(255,210,63,0.85)" stroke-width="1.6" marker-end="url(#arr-y)" fill="none"/>
+
+                  <!-- Step 3: SCORE -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <rect x="400" y="438" width="440" height="82" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                    <text x="620" y="468" text-anchor="middle" font-size="11" letter-spacing="0.18em" fill="rgba(255,210,63,0.8)">03 · SCORE</text>
+                    <text x="620" y="494" text-anchor="middle" font-size="17" fill="rgba(240,244,255,0.95)">held-out · decoding · RDM</text>
+                    <text x="620" y="512" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">same fixed metric set, every method</text>
+                  </g>
+
+                  <path d="M620 520 L620 556" stroke="rgba(255,210,63,0.85)" stroke-width="1.6" marker-end="url(#arr-y)" fill="none"/>
+
+                  <!-- Step 4: AGGREGATE -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <rect x="400" y="560" width="440" height="82" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                    <text x="620" y="590" text-anchor="middle" font-size="11" letter-spacing="0.18em" fill="rgba(255,210,63,0.8)">04 · AGGREGATE</text>
+                    <text x="620" y="616" text-anchor="middle" font-size="17" fill="rgba(240,244,255,0.95)">mean ± CI · paired tests</text>
+                    <text x="620" y="634" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">bootstrap CIs · Wilcoxon · MC-corrected</text>
+                  </g>
+
+                  <!-- Pipeline → Artifacts arrows -->
+                  <g fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.4">
+                    <path d="M840 601 C 880 601, 900 149, 940 149" marker-end="url(#arr-w)"/>
+                    <path d="M840 601 C 880 601, 900 349, 940 349" marker-end="url(#arr-w)"/>
+                    <path d="M840 601 C 880 601, 900 549, 940 549" marker-end="url(#arr-w)"/>
+                  </g>
+
+                  <!-- ====== Column 3: ARTIFACTS ====== -->
+                  <g font-family="ui-monospace,monospace" letter-spacing="0.04em">
+                    <g>
+                      <rect x="940" y="110" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="1060" y="142" text-anchor="middle" font-size="18" fill="rgba(240,244,255,0.95)">robustness curves</text>
+                      <text x="1060" y="168" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">score vs trials · SNR · seeds</text>
+                    </g>
+                    <g>
+                      <rect x="940" y="310" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="1060" y="342" text-anchor="middle" font-size="18" fill="rgba(240,244,255,0.95)">method scoreboard</text>
+                      <text x="1060" y="368" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">paired tests · CIs · win rates</text>
+                    </g>
+                    <g>
+                      <rect x="940" y="510" width="240" height="78" rx="8" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="1.4"/>
+                      <text x="1060" y="542" text-anchor="middle" font-size="18" fill="rgba(240,244,255,0.95)">repro figure pack</text>
+                      <text x="1060" y="568" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.55)">notebook · config · seed lock</text>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div style="display:none"><svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                      <path d="M32 0 L0 0 0 32" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    </pattern>
+                  </defs>
+                  <rect x="0" y="0" width="520" height="360" fill="url(#grid)"/>
+
+                  <g stroke-width="1.2" fill="none">
+                    <path d="M 70  40 C 240  40, 320 180, 470 180" stroke="#ff3b30" opacity="0.85"/>
+                    <path d="M 70  92 C 240  92, 320 180, 470 180" stroke="#ff8a1f" opacity="0.85"/>
+                    <path d="M 70 144 C 240 144, 320 180, 470 180" stroke="#ffd23f" opacity="0.85"/>
+                    <path d="M 70 196 C 240 196, 320 180, 470 180" stroke="#2fd06b" opacity="0.85"/>
+                    <path d="M 70 248 C 240 248, 320 180, 470 180" stroke="#6fb5ff" opacity="0.85"/>
+                    <path d="M 70 300 C 240 300, 320 180, 470 180" stroke="#ff3d97" opacity="0.85"/>
+                  </g>
+
+                  <g font-family="ui-monospace,monospace" font-size="11" letter-spacing="0.04em" fill="rgba(255,255,255,0.88)">
+                    <circle cx="70" cy="40"  r="4" fill="#ff3b30"/>
+                    <text x="84" y="44">public neural datasets</text>
+                    <circle cx="70" cy="92"  r="4" fill="#ff8a1f"/>
+                    <text x="84" y="96">PCA · FA · GPFA baselines</text>
+                    <circle cx="70" cy="144" r="4" fill="#ffd23f"/>
+                    <text x="84" y="148">CEBRA · LFADS embeddings</text>
+                    <circle cx="70" cy="196" r="4" fill="#2fd06b"/>
+                    <text x="84" y="200">RSA · CKA · dim metrics</text>
+                    <circle cx="70" cy="248" r="4" fill="#6fb5ff"/>
+                    <text x="84" y="252">finite-sample robustness</text>
+                    <circle cx="70" cy="300" r="4" fill="#ff3d97"/>
+                    <text x="84" y="304">reproducible figures</text>
+                  </g>
+
+                  <g transform="translate(470,180)">
+                    <circle r="34" fill="rgba(255,210,63,0.12)" stroke="#ffd23f" stroke-width="1.4"/>
+                    <circle r="20" fill="rgba(255,210,63,0.20)" stroke="#ffd23f" stroke-width="1"/>
+                    <text x="0" y="4" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#ffd23f">↗</text>
+                    <text x="0" y="58" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.55)">benchmark</text>
+                  </g>
+
+                  <text x="70"  y="20" font-family="ui-monospace,monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.55)">inputs</text>
+                  <text x="470" y="20" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" letter-spacing="0.08em" fill="rgba(255,255,255,0.55)">artifact</text>
+                </svg>
+              </div>
+              
+
+              <ul class="wedge-tags" aria-label="Components">
+                <li>PCA / FA / GPFA-style baselines</li>
+                <li>CEBRA or related embeddings</li>
+                <li>RSA · CKA · dimensionality metrics</li>
+                <li>finite-sample robustness</li>
+                <li>public neural datasets</li>
+                <li>reproducible figures</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="proj-slide" data-slide="1" aria-label="Project 2 of 3">
+            <header class="proj-slide-head">
+              <h2 class="block-title proj-placeholder-title placeholder">
+                <span class="mono proj-placeholder-tag">// placeholder</span>
+                [TODO — second project title.]
+              </h2>
+              <p class="block-lede placeholder">
+                [TODO — second project summary. Replace this slide when the
+                project is ready to describe.]
+              </p>
+            </header>
+
+            <div class="wedge-grid">
+              <div class="wedge-diagram wedge-diagram-empty placeholder" aria-hidden="true">
+                <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="grid2" width="32" height="32" patternUnits="userSpaceOnUse">
+                      <path d="M32 0 L0 0 0 32" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    </pattern>
+                  </defs>
+                  <rect x="0" y="0" width="520" height="320" fill="url(#grid2)"/>
+                  <g stroke="rgba(255,210,63,0.55)" stroke-dasharray="4 4" fill="none">
+                    <rect x="50" y="60" width="120" height="200" rx="6"/>
+                    <rect x="200" y="60" width="120" height="200" rx="6"/>
+                    <rect x="350" y="60" width="120" height="200" rx="6"/>
+                  </g>
+                  <g fill="rgba(255,210,63,0.85)" font-family="ui-monospace,monospace" font-size="11" letter-spacing="0.04em" text-anchor="middle">
+                    <text x="110" y="165">[TODO]</text>
+                    <text x="260" y="165">[TODO]</text>
+                    <text x="410" y="165">[TODO]</text>
+                  </g>
+                </svg>
+              </div>
+
+              <ul class="wedge-tags proj-placeholder-tags placeholder" aria-label="Components">
+                <li>scope · TBD</li>
+                <li>methods · TBD</li>
+                <li>data · TBD</li>
+                <li>artifact · TBD</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="proj-slide" data-slide="2" aria-label="Project 3 of 3">
+            <header class="proj-slide-head">
+              <h2 class="block-title proj-placeholder-title placeholder">
+                <span class="mono proj-placeholder-tag">// placeholder</span>
+                [TODO — third project title.]
+              </h2>
+              <p class="block-lede placeholder">
+                [TODO — third project summary. Replace this slide when the
+                project is ready to describe.]
+              </p>
+            </header>
+
+            <div class="wedge-grid">
+              <div class="wedge-diagram wedge-diagram-empty placeholder" aria-hidden="true">
+                <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="grid3" width="32" height="32" patternUnits="userSpaceOnUse">
+                      <path d="M32 0 L0 0 0 32" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    </pattern>
+                  </defs>
+                  <rect x="0" y="0" width="520" height="320" fill="url(#grid3)"/>
+                  <g stroke="rgba(255,210,63,0.55)" stroke-dasharray="4 4" fill="none">
+                    <rect x="50" y="60" width="120" height="200" rx="6"/>
+                    <rect x="200" y="60" width="120" height="200" rx="6"/>
+                    <rect x="350" y="60" width="120" height="200" rx="6"/>
+                  </g>
+                  <g fill="rgba(255,210,63,0.85)" font-family="ui-monospace,monospace" font-size="11" letter-spacing="0.04em" text-anchor="middle">
+                    <text x="110" y="165">[TODO]</text>
+                    <text x="260" y="165">[TODO]</text>
+                    <text x="410" y="165">[TODO]</text>
+                  </g>
+                </svg>
+              </div>
+
+              <ul class="wedge-tags proj-placeholder-tags placeholder" aria-label="Components">
+                <li>scope · TBD</li>
+                <li>methods · TBD</li>
+                <li>data · TBD</li>
+                <li>artifact · TBD</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="proj-dots" role="tablist" aria-label="Choose project">
+        <button class="proj-dot is-active" role="tab" aria-selected="true"  aria-label="Project 1" data-go="0"></button>
+        <button class="proj-dot"           role="tab" aria-selected="false" aria-label="Project 2" data-go="1"></button>
+        <button class="proj-dot"           role="tab" aria-selected="false" aria-label="Project 3" data-go="2"></button>
+      </div>
+    </section>
+
+    <!-- ============== § 04 / SELECTED WORK ============== -->
+    <section id="work" class="block block-dim">
+      <div class="block-head">
+        <div class="block-eyebrow">§ 05 / selected work</div>
+        <h2 class="block-title">Selected work.</h2>
+        <p class="block-lede">A small set of projects, deliberately
+          research-facing rather than product-shaped.</p>
+      </div>
+
+      <ul class="tiles">
+        <li class="tile">
+          <div class="tile-no">w.01</div>
+          <h3 class="tile-title">neural-field-gpu</h3>
+          <p class="tile-rel">A GPU implementation of neural field equations for studying spatial pattern formation in cortical models.</p>
+          <ul class="tile-tags">
+            <li>cuda</li><li>numerics</li><li>simulation</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/neural-field-gpu" target="_blank" rel="noopener" aria-label="Open neural-field-gpu on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.02</div>
+          <h3 class="tile-title">enso-attractor-recovery</h3>
+          <p class="tile-rel">Reconstructing low-dimensional dynamics from a noisy climate time series — a study in attractor recovery on real data.</p>
+          <ul class="tile-tags">
+            <li>delay embedding</li><li>dynamical systems</li><li>time series</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/enso-attractor-recovery" target="_blank" rel="noopener" aria-label="Open enso-attractor-recovery on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.03</div>
+          <h3 class="tile-title">HSI–MSI image fusion</h3>
+          <p class="tile-rel">Tensor-method approach to fusing hyperspectral and multispectral images for higher-resolution scientific imaging.</p>
+          <ul class="tile-tags">
+            <li>tensors</li><li>linear algebra</li><li>imaging</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/hsi-msi-fusion" target="_blank" rel="noopener" aria-label="Open HSI/MSI image fusion on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.04</div>
+          <h3 class="tile-title">high-d viz toolkit</h3>
+          <p class="tile-rel">Notebook-grade visualization of trajectories and embeddings in spaces that do not fit on a screen.</p>
+          <ul class="tile-tags">
+            <li>visualization</li><li>embeddings</li><li>geometry</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/high-d-viz" target="_blank" rel="noopener" aria-label="Open high-d viz toolkit on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.05</div>
+          <h3 class="tile-title">ml-eval-efficiency</h3>
+          <p class="tile-rel">Notes and code on training-loop correctness and evaluation efficiency for small-to-mid scale models.</p>
+          <ul class="tile-tags">
+            <li>ml</li><li>evaluation</li><li>efficiency</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/ml-eval-efficiency" target="_blank" rel="noopener" aria-label="Open ml-eval-efficiency on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============== § 05 / BACKGROUND ============== -->
     <section id="background" class="block">
       <div class="block-head">
-        <div class="block-eyebrow">§ 03 / technical background</div>
+        <div class="block-eyebrow">§ 06 / background</div>
         <h2 class="block-title">Background.</h2>
       </div>
 
-      <div class="bg-grid">
+      <div class="bg-grid bg-grid-headshot">
+        <div class="bg-headshot" aria-hidden="true">
+          <!-- TODO: drop a headshot at assets/headshot.jpg (400x500 or similar) -->
+          <div class="headshot-frame">
+            <!-- TODO: drop a headshot at assets/headshot.jpg and replace this block with <img src="assets/headshot.jpg" alt="Will Suan" /> -->
+            <div class="headshot-placeholder placeholder">
+              <span class="mono">headshot</span>
+              <span class="mono dim">assets/headshot.jpg</span>
+            </div>
+          </div>
+          <div class="headshot-caption mono">Will Suan · Austin, TX</div>
+        </div>
+
         <div class="bg-skills">
           <h3 class="bg-sub">Toolkit</h3>
           <ul class="skills">
-            <li>Advanced numerical methods</li>
+            <li>Numerical methods</li>
             <li>High-performance computing</li>
             <li>Machine learning</li>
             <li>Statistics</li>
             <li>Tensor methods</li>
             <li>Parallel computing</li>
             <li>Scientific simulation</li>
-            <li>Signal processing &amp; high-d data analysis</li>
+            <li>High-dimensional data analysis</li>
           </ul>
         </div>
 
@@ -256,232 +780,108 @@
             </div>
             <div>
               <dt>GPA</dt>
-              <dd>3.8</dd>
+              <dd>3.82</dd>
             </div>
             <div>
               <dt>Graduate coursework</dt>
-              <dd>Numerical Analysis, Complex Analysis, Tensor Methods, Physical Simulation for Computer Graphics, Computational Physics, Multidimensional Data Analysis, Applied Data Analysis &amp; Machine Learning, Quantum Algorithms for Scientific Computing</dd>
-            </div>
-            <div>
-              <dt>Experience</dt>
-              <dd class="exp-list">
-                <span>CTCN</span><span class="sep">/</span>
-                <span>CVC</span><span class="sep">/</span>
-                <span>Saronic</span><span class="sep">/</span>
-                <span>Lockheed Martin</span>
-              </dd>
+              <dd>Numerical Analysis: Algebra and Approximation, Complex Analysis, Tensor Methods, Physical Simulation for Computer Graphics, Computational Physics, Multidimensional Data Analysis, Applied Data Analysis &amp; Machine Learning, Quantum Algorithms for Scientific Computing</dd>
             </div>
           </dl>
-          <p class="bg-note">
-            Specific role descriptions and project details on request. I would
-            rather discuss them in context than list talking points here.
-          </p>
         </div>
       </div>
-    </section>
 
-    <!-- ============== RESEARCH WEDGE ============== -->
-    <section id="wedge" class="block block-wedge">
-      <div class="block-head">
-        <div class="block-eyebrow">
-          <span>§ 04 / current project direction</span>
-          <span class="status status-progress">in progress</span>
-        </div>
-        <h2 class="block-title">
-          Latent-variable and representation-geometry benchmarks for public neural data.
-        </h2>
-        <p class="block-lede">
-          I am exploring a small reproducible benchmark for comparing
-          latent-variable methods and representation-geometry metrics on public
-          neural population datasets. The goal is to make it easier to test
-          methods under finite-sample noise, compare baselines, and produce
-          clear reproducible figures.
+      <!-- Expanded experience rows -->
+      <div class="bg-experience">
+        <h3 class="bg-sub">Experience</h3>
+        <ol class="exp">
+          <li class="exp-row">
+            <div class="exp-when mono">2025–26</div>
+            <div class="exp-what">
+              <div class="exp-where">CVC, Computational Visualization Center · Research Assistant</div>
+              <p class="exp-note">
+                Worked on scientific machine learning and interpretable AI, including geometric reinforcement learning for navigation, port-Hamiltonian forecasting of dissipative dynamics, and structure-preserving neural networks.
+              </p>
+            </div>
+          </li>
+          <li class="exp-row">
+            <div class="exp-when mono">2025</div>
+            <div class="exp-what">
+              <div class="exp-where">Saronic Technologies · Machine Learning Intern</div>
+              <p class="exp-note">
+                Built ML pipelines for autonomous surface vessels, covering detection, tracking, evaluation, and edge-deployable inference.
+              </p>
+            </div>
+          </li>
+          <li class="exp-row">
+            <div class="exp-when mono">2024</div>
+            <div class="exp-what">
+              <div class="exp-where">CTCN, Center for Theoretical and Computational Neuroscience · Research Assistant</div>
+              <p class="exp-note">
+                Worked on spiking-network simulations and statistical inference for neural population dynamics, including point-process models and MCMC parameter recovery.
+              </p>
+            </div>
+          </li>
+          <li class="exp-row">
+            <div class="exp-when mono">2023</div>
+            <div class="exp-what">
+              <div class="exp-where">Lockheed Martin · Research Intern</div>
+              <p class="exp-note">
+                Worked on FDTD plasma-sheath simulations in C++ to find magnet geometries that could open a communication window for the plasma re-entry blackout problem.
+              </p>
+            </div>
+          </li>
+          <li class="exp-row">
+            <div class="exp-when mono">2022</div>
+            <div class="exp-what">
+              <div class="exp-where">Optimal · Data Science Intern</div>
+              <p class="exp-note">
+                Built ETL pipelines and audience segmentation models for marketing campaign data.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="bg-references">
+        <h3 class="bg-sub">References</h3>
+        <p class="bg-note">
+          Available on request.
         </p>
-      </div>
-
-      <div class="wedge-grid">
-        <div class="wedge-diagram" aria-hidden="true">
-          <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="wedgeLine" x1="0" x2="1">
-                <stop offset="0" stop-color="rgba(120,200,255,.15)"/>
-                <stop offset=".5" stop-color="rgba(170,140,255,.5)"/>
-                <stop offset="1" stop-color="rgba(120,255,180,.15)"/>
-              </linearGradient>
-            </defs>
-            <!-- column lanes -->
-            <g stroke="rgba(255,255,255,.06)" stroke-dasharray="1 4">
-              <line x1="120" x2="120" y1="20" y2="340"/>
-              <line x1="300" x2="300" y1="20" y2="340"/>
-              <line x1="480" x2="480" y1="20" y2="340"/>
-            </g>
-            <!-- input nodes -->
-            <g class="wd-node" transform="translate(120,80)">
-              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">spike trains</text>
-            </g>
-            <g class="wd-node" transform="translate(120,180)">
-              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">calcium ΔF/F</text>
-            </g>
-            <g class="wd-node" transform="translate(120,280)">
-              <rect x="-58" y="-16" width="116" height="32" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">behavior</text>
-            </g>
-            <!-- model nodes -->
-            <g class="wd-node accent-cyan" transform="translate(300,60)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
-              <text y="4" text-anchor="middle" fill="#dde7f0" font-family="IBM Plex Mono" font-size="11">PCA / FA</text>
-            </g>
-            <g class="wd-node accent-cyan" transform="translate(300,120)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
-              <text y="4" text-anchor="middle" fill="#dde7f0" font-family="IBM Plex Mono" font-size="11">GPFA</text>
-            </g>
-            <g class="wd-node accent-violet" transform="translate(300,180)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
-              <text y="4" text-anchor="middle" fill="#e6dcf3" font-family="IBM Plex Mono" font-size="11">CEBRA-style</text>
-            </g>
-            <g class="wd-node accent-green" transform="translate(300,240)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
-              <text y="4" text-anchor="middle" fill="#dceee0" font-family="IBM Plex Mono" font-size="11">RSA / CKA</text>
-            </g>
-            <g class="wd-node accent-green" transform="translate(300,300)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="currentColor"/>
-              <text y="4" text-anchor="middle" fill="#dceee0" font-family="IBM Plex Mono" font-size="11">dim. metrics</text>
-            </g>
-            <!-- output nodes -->
-            <g class="wd-node" transform="translate(480,120)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">finite-sample</text>
-            </g>
-            <g class="wd-node" transform="translate(480,180)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">comparisons</text>
-            </g>
-            <g class="wd-node" transform="translate(480,240)">
-              <rect x="-66" y="-14" width="132" height="28" rx="4" fill="#0e1117" stroke="rgba(255,255,255,.18)"/>
-              <text y="4" text-anchor="middle" fill="#cfd3dc" font-family="IBM Plex Mono" font-size="11">repro figures</text>
-            </g>
-            <!-- connectors -->
-            <g fill="none" stroke="url(#wedgeLine)" stroke-width="1">
-              <path d="M178 80 C 230 80, 230 60, 234 60"/>
-              <path d="M178 80 C 230 80, 230 120, 234 120"/>
-              <path d="M178 80 C 230 80, 230 180, 234 180"/>
-              <path d="M178 180 C 230 180, 230 120, 234 120"/>
-              <path d="M178 180 C 230 180, 230 180, 234 180"/>
-              <path d="M178 180 C 230 180, 230 240, 234 240"/>
-              <path d="M178 280 C 230 280, 230 240, 234 240"/>
-              <path d="M178 280 C 230 280, 230 300, 234 300"/>
-              <path d="M366 60 C 410 60, 410 120, 414 120"/>
-              <path d="M366 120 C 410 120, 410 120, 414 120"/>
-              <path d="M366 180 C 410 180, 410 180, 414 180"/>
-              <path d="M366 240 C 410 240, 410 180, 414 180"/>
-              <path d="M366 240 C 410 240, 410 240, 414 240"/>
-              <path d="M366 300 C 410 300, 410 240, 414 240"/>
-            </g>
-          </svg>
-        </div>
-
-        <ul class="wedge-tags" aria-label="Components">
-          <li>PCA / FA / GPFA-style baselines</li>
-          <li>CEBRA or related embeddings</li>
-          <li>RSA · CKA · dimensionality metrics</li>
-          <li>finite-sample robustness</li>
-          <li>public neural datasets</li>
-          <li>reproducible figures</li>
+        <ul class="refs">
+          <li class="ref">
+            <a class="ref-name" href="https://web.ma.utexas.edu/users/beckner/" target="_blank" rel="noopener">William Beckner</a>
+            <span class="ref-role mono">UT Mathematics · analysis</span>
+          </li>
+          <li class="ref">
+            <a class="ref-name" href="https://users.oden.utexas.edu/~tanbui/" target="_blank" rel="noopener">Tan Bui-Thanh</a>
+            <span class="ref-role mono">Oden Institute · scientific computing</span>
+          </li>
+          <li class="ref">
+            <a class="ref-name" href="https://www.jsg.utexas.edu/researcher/sergey_fomel/" target="_blank" rel="noopener">Sergey Fomel</a>
+            <span class="ref-role mono">Jackson School of Geosciences · computational imaging</span>
+          </li>
         </ul>
       </div>
     </section>
 
-    <!-- ============== SELECTED WORK ============== -->
-    <section id="work" class="block">
+    <!-- ============== § 06 / CONTACT ============== -->
+    <section id="contact" class="block block-dim block-contact">
       <div class="block-head">
-        <div class="block-eyebrow">§ 05 / selected work</div>
-        <h2 class="block-title">Selected work.</h2>
-        <p class="block-lede">A small set of projects, deliberately
-          research-facing rather than product-shaped.</p>
-      </div>
-
-      <ul class="tiles">
-        <li class="tile">
-          <div class="tile-no">w.01</div>
-          <h3 class="tile-title">neural-field-gpu</h3>
-          <p class="tile-rel">A GPU implementation of neural field equations for studying spatial pattern formation in cortical models.</p>
-          <ul class="tile-tags">
-            <li>cuda</li><li>numerics</li><li>simulation</li>
-          </ul>
-          <a class="tile-link" href="https://github.com/willsuan/neural-field-gpu" target="_blank" rel="noopener" aria-label="Open neural-field-gpu">
-            <span>repo</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-
-        <li class="tile">
-          <div class="tile-no">w.02</div>
-          <h3 class="tile-title">enso-attractor-recovery</h3>
-          <p class="tile-rel">Reconstructing low-dimensional dynamics from a noisy climate time series, a study in attractor recovery on real data.</p>
-          <ul class="tile-tags">
-            <li>delay embedding</li><li>dynamical systems</li><li>time series</li>
-          </ul>
-          <a class="tile-link" href="https://github.com/willsuan/enso-attractor-recovery" target="_blank" rel="noopener" aria-label="Open enso-attractor-recovery">
-            <span>repo</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-
-        <li class="tile">
-          <div class="tile-no">w.03</div>
-          <h3 class="tile-title">HSI–MSI image fusion</h3>
-          <p class="tile-rel">Tensor-method approach to fusing hyperspectral and multispectral images for higher-resolution scientific imaging.</p>
-          <ul class="tile-tags">
-            <li>tensors</li><li>linear algebra</li><li>imaging</li>
-          </ul>
-          <a class="tile-link" href="https://github.com/willsuan/HSI-MSI-Image-Fusion" target="_blank" rel="noopener" aria-label="Open HSI MSI image fusion">
-            <span>repo</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-
-        <li class="tile">
-          <div class="tile-no">w.04</div>
-          <h3 class="tile-title">high-d viz toolkit</h3>
-          <p class="tile-rel">Notebook-grade visualization of trajectories and embeddings in spaces that do not fit on a screen, with details available on request.</p>
-          <ul class="tile-tags">
-            <li>visualization</li><li>embeddings</li><li>geometry</li>
-          </ul>
-          <a class="tile-link" href="mailto:suan@utexas.edu?subject=High-dimensional%20visualization%20work" aria-label="Ask about high-dimensional visualization work">
-            <span>details</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-
-        <li class="tile">
-          <div class="tile-no">w.05</div>
-          <h3 class="tile-title">ml-eval-efficiency</h3>
-          <p class="tile-rel">Notes and code on training-loop correctness and evaluation efficiency for small-to-mid scale models.</p>
-          <ul class="tile-tags">
-            <li>ml</li><li>evaluation</li><li>efficiency</li>
-          </ul>
-          <a class="tile-link" href="mailto:suan@utexas.edu?subject=ML%20evaluation%20work" aria-label="Ask about ML evaluation work">
-            <span>details</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ============== CONTACT ============== -->
-    <section id="contact" class="block block-contact">
-      <div class="block-head">
-        <div class="block-eyebrow">§ 06 / contact</div>
-        <h2 class="block-title">If you know of a scoped unpaid project where a math and scientific-computing background could be useful, I would be grateful to talk.</h2>
+        <div class="block-eyebrow">§ 07 / contact</div>
+        <h2 class="block-title">If you know of a project where a math and scientific-computing background could be useful, I would be grateful to talk.</h2>
       </div>
 
       <div class="contact-grid">
         <ul class="contact-list">
           <li>
             <span class="ci">email</span>
-            <a href="mailto:suan@utexas.edu">suan@utexas.edu</a>
+            <!-- Email is obfuscated below and reassembled by JS on first interaction.
+                 Crawlers should not see a plain mailto. -->
+            <a class="email-link"
+               href="#"
+               data-user="william.suan"
+               data-domain="gmail.com"
+               aria-label="Reveal email address">[click to reveal]</a>
           </li>
           <li>
             <span class="ci">github</span>
@@ -489,16 +889,16 @@
           </li>
           <li>
             <span class="ci">linkedin</span>
-            <a href="https://www.linkedin.com/in/william-suan/" target="_blank" rel="noopener">linkedin.com/in/william-suan</a>
+            <a href="https://www.linkedin.com/in/willsuan" target="_blank" rel="noopener">linkedin.com/in/willsuan</a>
           </li>
           <li>
             <span class="ci">cv</span>
-            <a href="mailto:suan@utexas.edu?subject=CV%20request">available on request</a>
+            <a href="assets/Will_Suan_Resume.pdf">Will_Suan_Resume.pdf</a>
           </li>
         </ul>
 
         <p class="contact-tag">
-          <span class="mono">suan@utexas.edu</span> <span>available for a substantial, potentially full-time research contribution from now through September.</span>
+          <span class="mono">w.suan@</span> <span>available full-time through September.</span>
         </p>
       </div>
     </section>
@@ -506,29 +906,29 @@
     <footer class="foot">
       <div class="foot-inner">
         <span class="mono">© 2026 · will suan</span>
-        <span class="mono">austin to new york</span>
-        <span class="mono">last build · <span id="build-stamp">pending</span></span>
+        <span class="mono">austin → new york</span>
+        <span class="mono">last build · <span id="build-stamp">—</span></span>
       </div>
     </footer>
 
   </main>
 
-  <!-- command palette (cmd/ctrl + k) -->
-  <div id="palette" class="palette" aria-hidden="true" role="dialog" aria-label="Quick navigation">
-    <div class="palette-card">
-      <div class="palette-bar">
-        <span class="mono">›</span>
-        <input id="palette-input" type="text" placeholder="jump to section…" autocomplete="off" spellcheck="false" />
-        <span class="mono palette-hint">esc</span>
-      </div>
-      <ul id="palette-list" class="palette-list"></ul>
-    </div>
-  </div>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="research3d.js?v=16"></script>
+  <script src="script.js?v=5"></script>
 
-  <button id="palette-toggle" class="palette-toggle" aria-label="Open quick nav">
-    <span class="mono">⌘ K</span>
-  </button>
-
-  <script src="script.js"></script>
+  <!-- Tweaks (toolbar-toggled) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks.jsx"></script>
 </body>
 </html>
