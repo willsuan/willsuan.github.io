@@ -1269,7 +1269,9 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   align-items: start;
 }
 .wedge-diagram {
-  background: var(--bg-2);
+  /* No tinted inner panel — keeps the projects section a single uniform
+     blue rather than a darker inset against a lighter outer. */
+  background: transparent;
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 28px 14px 14px;

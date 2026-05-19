@@ -191,34 +191,50 @@ function initResearch3D(canvas) {
       spin.updateMatrixWorld(true);
 
       // Camera fits the FULL brain (cortex + cerebellum + brainstem) with
-      // a touch of margin, so dragging never reveals an empty patch.
+      // generous margin so no part of the mesh ever clips the panel edges.
       const size = fullBox.getSize(new THREE.Vector3()).length();
-      camera.position.z = size * 1.40;
+      camera.position.z = size * 1.70;
       camera.near = size / 100;
       camera.far = size * 100;
       camera.updateProjectionMatrix();
 
-      // Region centroids in spin-LOCAL coords. orient.matrixWorld already
-      // includes the recentering, and spin is identity right now, so world
-      // coords ≡ spin-local coords at this instant. Stored once; rotated
-      // each frame by spin.matrixWorld.
+      // Region label anchors. Instead of the geometric centroid (which sits
+      // near the midline for bilateral lobes and stacks all labels in the
+      // middle of the screen), we pick the mesh vertex that maximizes a
+      // per-region preferred direction in spin-local space. This anchors
+      // each label to a distinct piece of the visible surface so they
+      // spread across the panel.
+      const PREFERRED_DIR = {
+        // World coords after orient: +X = screen-right, +Y = up,
+        // +Z = toward camera. Pick directions that land on the surface
+        // visible in the default face-forward view, well separated.
+        frontal:    new THREE.Vector3(-0.7,  0.4,  0.8).normalize(),
+        parietal:   new THREE.Vector3( 0.8,  0.7, -0.1).normalize(),
+        occipital:  new THREE.Vector3( 0.2,  0.1, -1.0).normalize(),
+        temporal:   new THREE.Vector3( 0.9, -0.4,  0.3).normalize(),
+        cerebellum: new THREE.Vector3(-0.5, -0.8, -0.3).normalize(),
+        brainstem:  new THREE.Vector3( 0.0, -1.0,  0.0).normalize(),
+      };
       const tmpV = new THREE.Vector3();
       for (const name of Object.keys(regions)) {
         const r = regions[name];
-        const sum = new THREE.Vector3();
-        let n = 0;
+        const dir = PREFERRED_DIR[name] || new THREE.Vector3(0, 0, 1);
+        let best = null;
+        let bestDot = -Infinity;
         for (const m of r.meshes) {
           const pos = m.geometry.attributes.position;
-          const step = Math.max(1, Math.floor(pos.count / 1024));
+          const step = Math.max(1, Math.floor(pos.count / 512));
           for (let i = 0; i < pos.count; i += step) {
             tmpV.set(pos.getX(i), pos.getY(i), pos.getZ(i));
             tmpV.applyMatrix4(orient.matrixWorld);
-            sum.add(tmpV);
-            n++;
+            const d = tmpV.dot(dir);
+            if (d > bestDot) {
+              bestDot = d;
+              best = tmpV.clone();
+            }
           }
         }
-        sum.divideScalar(n);
-        r.centroid = sum;
+        r.centroid = best;
       }
 
       target.rotY = 0;

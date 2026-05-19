@@ -233,7 +233,7 @@
       },
       {
         name: 'Line attractor',
-        brief: 'A 1D manifold of stable states. Proposed to support graded persistent activity in neural integrators — classically the oculomotor velocity-to-position integrator.',
+        brief: 'A 1D manifold of stable states. Proposed to support graded persistent activity in neural integrators, classically the oculomotor velocity-to-position integrator.',
         dt: 0.02,
         seedR: 1.8,
         field: (x, y, z) => {
@@ -255,7 +255,7 @@
       },
       {
         name: 'Limit cycle (Van der Pol)',
-        brief: 'A closed periodic orbit that attracts nearby trajectories. Models neural oscillators — respiratory rhythm, central pattern generators, gamma rhythms.',
+        brief: 'A closed periodic orbit that attracts nearby trajectories. Models neural oscillators including respiratory rhythm, central pattern generators, gamma rhythms.',
         dt: 0.02,
         seedR: 1.4,
         field: (x, y, z) => {
@@ -298,7 +298,7 @@
       },
       {
         name: 'FitzHugh–Nagumo (spiking)',
-        brief: 'A 2-D reduction of the Hodgkin–Huxley equations. Captures the spike-and-recover excitability of a neuron — a relaxation oscillator when the input crosses threshold.',
+        brief: 'A 2-D reduction of the Hodgkin–Huxley equations. Captures the spike-and-recover excitability of a neuron, becoming a relaxation oscillator when the input crosses threshold.',
         dt: 0.05,
         seedR: 1.6,
         field: (x, y, z) => {
@@ -314,7 +314,7 @@
       },
       {
         name: 'Wong–Wang (decision)',
-        brief: 'A two-population mean-field model of perceptual decision-making. Mutual inhibition between competing pools yields two stable high-rate states — the network commits to one choice.',
+        brief: 'A two-population mean-field model of perceptual decision-making. Mutual inhibition between competing pools yields two stable high-rate states; the network commits to one choice.',
         dt: 0.04,
         seedR: 1.4,
         field: (x, y, z) => {
