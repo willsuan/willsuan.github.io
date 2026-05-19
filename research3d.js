@@ -14,15 +14,6 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
-const canvas = document.getElementById('brain-canvas');
-if (canvas) {
-  try {
-    initResearch3D(canvas);
-  } catch (e) {
-    console.error('[research3d] init failed:', e);
-  }
-}
-
 const TONE_HEX = {
   red:     0xff3b30,
   orange:  0xff8a1f,
@@ -409,4 +400,16 @@ function initResearch3D(canvas) {
   }
   if (reduceMotion) composer.render();
   else requestAnimationFrame(tick);
+}
+
+// Bootstrap. Placed at the bottom so all module-level consts (TONE_HEX,
+// REGION_TONE, REGION_LABEL, HINT_BASE) are fully initialized before
+// initResearch3D synchronously references them via setHintFor(null).
+const canvas = document.getElementById('brain-canvas');
+if (canvas) {
+  try {
+    initResearch3D(canvas);
+  } catch (e) {
+    console.error('[research3d] init failed:', e);
+  }
 }
