@@ -224,6 +224,8 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   min-width: 0;
 }
+/* Breathing room between the project summary text and the figure block. */
+.proj-slide-head { margin-bottom: var(--v-sub); }
 .proj-dots {
   display: flex;
   justify-content: center;
@@ -536,7 +538,8 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   color: var(--fg);
   white-space: nowrap;
   max-width: none;
-  margin: 0 0 var(--space-8);
+  margin: 0 auto var(--space-8);
+  text-align: center;
 }
 .statement-body { max-width: 65ch; margin: 0; }
 .statement-body p {
@@ -976,9 +979,9 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
    ========================================================= */
 .brain-wrap {
   position: relative;
-  max-width: 1040px;
+  max-width: 1100px;
   margin: 0 auto;
-  height: 500px;
+  height: 580px;
   /* Set the page bg here so the video's mix-blend-mode: lighten has a
      known backdrop to blend against (the parent section establishes a
      stacking context, so the body bg is not directly accessible). */
@@ -1251,7 +1254,9 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   max-width: var(--maxw);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  /* Give the schematic ~3x the width of the tag column so the figure has
+     room to read; the tag list stays compact on the right. */
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
   gap: var(--gap-md);
   align-items: start;
 }
@@ -1271,7 +1276,7 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   font-size: 10.5px;
   color: var(--dim);
 }
-.wedge-diagram svg { display: block; width: 100%; height: auto; max-height: 460px; }
+.wedge-diagram svg { display: block; width: 100%; height: auto; max-height: 680px; }
 .wedge-tags { min-width: 0; }
 .wd-node.accent-cyan   { color: var(--accent-blue); }
 .wd-node.accent-violet { color: var(--accent-magenta); }
