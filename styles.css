@@ -525,7 +525,16 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
 /* =========================================================
    § 02  Research-statement block — quiet typographic interlude
    ========================================================= */
-.block-statement .block-head { max-width: none; margin: 0 auto var(--v-head); text-align: left; }
+/* The block-head shrinks to the width of its widest child (the title).
+   margin: 0 auto centers the whole unit, and text-align:left keeps the
+   eyebrow and the title flush-left against the same x — so "§ 03 /
+   research statement" starts exactly where "When an idea..." starts. */
+.block-statement .block-head {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto var(--v-head);
+  text-align: left;
+}
 .block-statement .block-eyebrow { justify-content: flex-start; }
 .block-statement .statement-body { margin: 0 auto; }
 .block-statement .statement-title {
@@ -538,8 +547,8 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   color: var(--fg);
   white-space: nowrap;
   max-width: none;
-  margin: 0 auto var(--space-8);
-  text-align: center;
+  margin: 0 0 var(--space-8);
+  text-align: left;
 }
 .statement-body { max-width: 65ch; margin: 0; }
 .statement-body p {
@@ -982,10 +991,9 @@ a.ref-name:hover { color: var(--accent-yellow); border-color: var(--accent-yello
   max-width: 1100px;
   margin: 0 auto;
   height: 580px;
-  /* Set the page bg here so the video's mix-blend-mode: lighten has a
-     known backdrop to blend against (the parent section establishes a
-     stacking context, so the body bg is not directly accessible). */
-  background-color: var(--bg);
+  /* Transparent so the section's background shows straight through —
+     no edge mismatch between the brain panel and the surrounding page. */
+  background: transparent;
 }
 .brain-media,
 #brain-canvas {

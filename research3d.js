@@ -82,7 +82,11 @@ function initResearch3D(canvas) {
   // X and Y signs; Rx(-π/2) then sends fsaverage Z to world +Y and
   // fsaverage Y to world +Z. Net: top of head at +Y, nose at +Z (visible
   // to a camera at +Z).
-  orient.rotation.set(-Math.PI / 2, 0, Math.PI);
+  // Base axis fix-up: -π/2 about X sends fsaverage's superior axis (+Z) up
+  // and anterior (+Y) toward the camera. The extra -0.26 rad on X tilts the
+  // brain ~15° backward so the front lifts up and it reads as standing
+  // upright instead of slumping forward.
+  orient.rotation.set(-Math.PI / 2 - 0.26, 0, Math.PI);
   spin.add(orient);
 
   // region name → { meshes, materials, wireMats, toneColor, baseColor,
@@ -168,28 +172,28 @@ function initResearch3D(canvas) {
       orient.add(root);
       orient.add(wireGroup);
 
-      // Compute the bounds of the CORTEX only (the four lobes), not the
-      // cerebellum + brainstem. Centering on the cortex keeps the cortical
-      // mass symmetric around the rotation axis — otherwise the cerebellum
-      // and brainstem drag the bbox center down and the brain reads as
-      // tilted forward / off-center.
+      // Centering: use cortex-only bounds so the cortex sits symmetrically
+      // around the rotation axis. Framing: use full-brain bounds so the
+      // cerebellum and brainstem are fully in view at default zoom.
       spin.updateMatrixWorld(true);
       const CORTEX = new Set(['frontal', 'parietal', 'occipital', 'temporal']);
       const cortexBox = new THREE.Box3();
-      const meshBox = new THREE.Box3();
+      const fullBox   = new THREE.Box3();
+      const meshBox   = new THREE.Box3();
       for (const m of pickables) {
         m.updateMatrixWorld(true);
         meshBox.setFromObject(m);
+        fullBox.union(meshBox);
         if (CORTEX.has(m.userData.region)) cortexBox.union(meshBox);
       }
       const c = cortexBox.getCenter(new THREE.Vector3());
       orient.position.sub(c);
       spin.updateMatrixWorld(true);
 
-      // Fit camera to the CORTEX, not the full brain — the cortex is the
-      // main subject; the cerebellum can hang gracefully below the framing.
-      const size = cortexBox.getSize(new THREE.Vector3()).length();
-      camera.position.z = size * 1.20;
+      // Camera fits the FULL brain (cortex + cerebellum + brainstem) with
+      // a touch of margin, so dragging never reveals an empty patch.
+      const size = fullBox.getSize(new THREE.Vector3()).length();
+      camera.position.z = size * 1.40;
       camera.near = size / 100;
       camera.far = size * 100;
       camera.updateProjectionMatrix();
