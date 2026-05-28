@@ -383,8 +383,7 @@ a.placeholder { text-decoration: underline dashed rgba(255,255,255,.25); text-un
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
-  border: 1px solid var(--line-2);
-  background: rgba(0,0,0,.18);
+  background: transparent;
   overflow: hidden;
   border-radius: 2px;
 }

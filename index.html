@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="styles.css?v=13" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -668,6 +668,32 @@
       <ul class="tiles">
         <li class="tile">
           <div class="tile-no">w.01</div>
+          <h3 class="tile-title">neural-field-gpu</h3>
+          <p class="tile-rel">GPU implementation of neural-field equations for studying spatial pattern formation in cortical population models. CUDA kernels for the integral term, with stability sweeps over coupling and gain.</p>
+          <ul class="tile-tags">
+            <li>cuda</li><li>neural fields</li><li>numerics</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/neural-field-gpu" target="_blank" rel="noopener" aria-label="Open neural-field-gpu on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.02</div>
+          <h3 class="tile-title">HSI-MSI-Image-Fusion</h3>
+          <p class="tile-rel">Hyperspectral-multispectral image fusion via tensor decompositions, combining a low-spatial high-spectral source with a high-spatial low-spectral one into a single high-resolution cube.</p>
+          <ul class="tile-tags">
+            <li>tensor methods</li><li>linear algebra</li><li>imaging</li>
+          </ul>
+          <a class="tile-link" href="https://github.com/willsuan/HSI-MSI-Image-Fusion" target="_blank" rel="noopener" aria-label="Open HSI-MSI-Image-Fusion on GitHub">
+            <span>repo</span>
+            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          </a>
+        </li>
+
+        <li class="tile">
+          <div class="tile-no">w.03</div>
           <h3 class="tile-title">enso-attractor-recovery</h3>
           <p class="tile-rel">Recovering the ENSO attractor from monthly sea-surface-temperature anomalies via PCA, anisotropic diffusion maps, and a Linear Inverse Model. Julia, from scratch.</p>
           <ul class="tile-tags">
@@ -680,7 +706,7 @@
         </li>
 
         <li class="tile">
-          <div class="tile-no">w.02</div>
+          <div class="tile-no">w.04</div>
           <h3 class="tile-title">fft-ocean</h3>
           <p class="tile-rel">Tessendorf FFT ocean heightfield simulation in C++ with kissfft and Polyscope. A spectral-method playground for wave statistics and rendering.</p>
           <ul class="tile-tags">
@@ -693,20 +719,7 @@
         </li>
 
         <li class="tile">
-          <div class="tile-no">w.03</div>
-          <h3 class="tile-title">furious-birds-3d</h3>
-          <p class="tile-rel">3D rigid-body simulation with Newtonian gravity, integrated using a variational symplectic scheme so energy and momentum drift stay bounded over long horizons.</p>
-          <ul class="tile-tags">
-            <li>variational integrators</li><li>rigid body</li><li>c++</li>
-          </ul>
-          <a class="tile-link" href="https://github.com/willsuan/furious-birds-3d" target="_blank" rel="noopener" aria-label="Open furious-birds-3d on GitHub">
-            <span>repo</span>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3h8v8M13 3 4 12" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-          </a>
-        </li>
-
-        <li class="tile">
-          <div class="tile-no">w.04</div>
+          <div class="tile-no">w.05</div>
           <h3 class="tile-title">universe-of-goo</h3>
           <p class="tile-rel">2D mass-spring physics with four numerical integrators (explicit Euler, implicit Euler, midpoint, velocity Verlet) compared on the same scenes. C++, Eigen, Polyscope.</p>
           <ul class="tile-tags">
@@ -719,7 +732,7 @@
         </li>
 
         <li class="tile">
-          <div class="tile-no">w.05</div>
+          <div class="tile-no">w.06</div>
           <h3 class="tile-title">cloth-encounters</h3>
           <p class="tile-rel">Position-based dynamics cloth simulation as a graduate-milestone project. Stable constraint projection under stretching, bending, and self-collision.</p>
           <ul class="tile-tags">
@@ -916,8 +929,8 @@
     }
   }
   </script>
-  <script type="module" src="research3d.js?v=21"></script>
-  <script src="script.js?v=6"></script>
+  <script type="module" src="research3d.js?v=22"></script>
+  <script src="script.js?v=7"></script>
 
   <!-- Tweaks (toolbar-toggled) -->
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
